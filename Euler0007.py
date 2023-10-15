@@ -1,17 +1,13 @@
 import math
 
-def isPrime(i):
-    if i == 1:
+def isPrime(n):
+    if n == 1:
         return False
-    if i == 2:
-        return True
-    if i % 2 == 0:
+    if n % 2 == 0:
         return False
     
-    j = math.floor(math.sqrt(i))
-
-    for i in range(3, j):
-        if i % j == 0:
+    for i in range(3, int(n**0.5)+1, 2):
+        if n % i == 0:
             return False
         
     return True
@@ -26,6 +22,7 @@ while count <= 10001:
     if isPrime(i) == True:
         count += 1
     
+print(count)
 print(i)
 
 #INCOMPLETE
