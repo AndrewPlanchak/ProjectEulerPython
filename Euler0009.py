@@ -26,3 +26,4 @@ while found == False:
             for c in range(0, 500):
                 if isPythagoreanTriplet(a, b, c) == True and sumTo1000(a, b, c) == True:
                     print(a*b*c)
+                    break
