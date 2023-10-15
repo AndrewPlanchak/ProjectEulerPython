@@ -17,68 +17,29 @@ def checkDiagProduct(i, j, lines): #will return the largest product of 4 adjacen
 
     #NB: 1ST NUMBER IS VERTICAL SECOND IS HORIZONTAL
 
-    largestProduct = 0
+    leftCheck = (j >= 3)
+    downCheck = (i <= 15)
+    rightCheck = (j <= 15)
 
-    if i >= 3: upCheck = True
-    else: upCheck = False
+    l = 0
+    d = 0
+    dl = 0
+    dr = 0
+
+    if(leftCheck): l = lines[i][j] * lines[i][j-1] * lines[i][j-2] * lines[i][j-3]
+
+    if(downCheck): d = lines[i][j] * lines[i+1][j] * lines[i+2][j] * lines[i+3][j]
     
-    if j >= 3: leftCheck = True
-    else: leftCheck = False
+    if(downCheck and leftCheck): dl = lines[i][j] * lines[i+1][j-1] * lines[i+2][j-2] * lines[i+3][j-3]
 
-    if i <= 15: downCheck = True
-    else: downCheck = False
+    if(downCheck and rightCheck): dr = lines[i][j] * lines[i+1][j+1] * lines[i+2][j+2] * lines[i+3][j+3]
 
-    if j<= 15: rightCheck = True
-    else: rightCheck = False
-
-    #Bugfixing Tat
-    #print("i: ", i, " j: ", j)
-    #print("upCheck: ", upCheck)
-    #print("downCheck: ", downCheck)
-    #print("leftCheck: ", leftCheck)
-    #print("rightCheck: ", rightCheck)
-    #print()
-
-    if upCheck == True: 
-        if lines[i][j] * lines[i-1][j] * lines[i-2][j] * lines[i-3][j] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i-1][j] * lines[i-2][j] * lines[i-3][j]
-
-    if downCheck == True: 
-        if lines[i][j] * lines[i+1][j] * lines[i+2][j] * lines[i+3][j] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i-1][j] * lines[i-2][j] * lines[i-3][j]
-
-    if leftCheck == True:
-        if lines[i][j] * lines[i][j-1] * lines[i][j-2] * lines[i][j-3] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i][j-1] * lines[i][j-2] * lines[i][j-3]
-
-    if rightCheck == True:
-        if lines[i][j] * lines[i][j+1] * lines[i][j+2] * lines[i][j+3] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i][j+1] * lines[i][j+2] * lines[i][j+3]
-
-    if upCheck == True and leftCheck == True:
-        if lines[i][j] * lines[i-1][j-1] * lines[i-2][j-2] * lines[i-3][j-3] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i-1][j-1] * lines[i-2][j-2] * lines[i-3][j-3]
-
-    if upCheck == True and rightCheck == True:
-        if lines[i][j] * lines[i-1][j+1] * lines[i-2][j+2] * lines[i-3][j+3] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i-1][j+1] * lines[i-2][j+2] * lines[i-3][j+3]
-
-    if downCheck == True and leftCheck == True:
-        if lines[i][j] * lines[i+1][j-1] * lines[i+2][j-2] * lines[i+3][j-3] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i+1][j-1] * lines[i+2][j-2] * lines[i+3][j-3]
-
-    if downCheck == True and rightCheck == True:
-        if lines[i][j] * lines[i+1][j+1] * lines[i+2][j+2] * lines[i+3][j+3] >= largestProduct:
-            largestProduct = lines[i][j] * lines[i+1][j+1] * lines[i+2][j+2] * lines[i+3][j+3]
-
-    return largestProduct
+    return max(l, d, dl, dr)
 
 largestProduct = 0
 
 for i in range (0, 19):
     for j in range(0, 19):
-        largestCurrent = checkDiagProduct(i, j, lines)
-
-        if largestCurrent > largestProduct: largestProduct = largestCurrent
+        largestProduct = max(largestProduct, checkDiagProduct(i, j, lines))
 
 print (largestProduct)
