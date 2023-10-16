@@ -25,5 +25,3 @@ for i in range(1, 1000):
     count += numberToWord(i)
     
 print(count)
-
-#FIX THIS - WRONG RESULT - MISSING DIVIDE?
