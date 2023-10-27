@@ -11,6 +11,3 @@ for i in range(1, 1000000):
     
     largest = max(count, largest)
 
-print(largest)
-
-# Finished - SLOW
